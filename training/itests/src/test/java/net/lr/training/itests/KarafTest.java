@@ -22,11 +22,16 @@ import java.io.File;
 
 import javax.inject.Inject;
 
+import net.lr.training.model.Address;
+import net.lr.training.model.AddressService;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
+import org.ops4j.pax.exam.karaf.options.KarafDistributionOption;
 import org.ops4j.pax.exam.options.MavenArtifactUrlReference;
 import org.osgi.framework.BundleContext;
 
@@ -34,6 +39,9 @@ import org.osgi.framework.BundleContext;
 public class KarafTest {
     @Inject
     protected BundleContext bundleContext;
+    
+    @Inject
+    protected AddressService addressService;
 
     public File getConfigFile(String path) {
         return new File(this.getClass().getResource(path).getFile());
@@ -46,7 +54,7 @@ public class KarafTest {
             .artifactId("apache-karaf")
             .version("3.0.0")
             .type("tar.gz");
-        MavenArtifactUrlReference tasklistRepo = maven()
+        MavenArtifactUrlReference trainingRepo = maven()
             .groupId("net.lr.training")
             .artifactId("training-features")
             .versionAsInProject()
@@ -55,13 +63,20 @@ public class KarafTest {
             karafDistributionConfiguration().frameworkUrl(karafUrl).name("Apache Karaf")
                 .unpackDirectory(new File("target/exam")),
             keepRuntimeFolder(),
-            //features(tasklistRepo, "training")
-            // KarafDistributionOption.debugConfiguration("5005", true),
+            features(trainingRepo, "training"),
+            KarafDistributionOption.debugConfiguration("5005", true),
         };
     }
     
     @Test
     public void test1() throws Exception {
+    	Address address = new Address();
+    	address.setName("Christian");
+    	address.setCity("Forst");
+		addressService.create("Christian", address);
+		
+		Address address2 = addressService.find("Christian");
+		Assert.assertEquals("Forst", address2.getCity());
     }
 
 }
