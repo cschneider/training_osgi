@@ -12,7 +12,7 @@
         <module>features</module>
         <module>itests</module>
         <module>model</module>
-        <module></module>
+        <module>service</module>
     </modules>
 
     <build>
