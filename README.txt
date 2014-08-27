@@ -42,19 +42,28 @@ h2. 3. Create an integration test using pax exam that tests your service
 - Change the test class to install your service feature, call your service and check the result 
 - Run the test and verify it works correctly
 
-h2. 3. Create a CXF Rest endpoint that uses your service
+h2. 4. Create a CXF Rest endpoint that uses your service
  
 - Create a module named endpoint that implements a CXF rest endpoint and exports it using blueprint and the cxf rest namespace
 - Add a feature for the new module
 - Test the feature in karaf and verify the rest endpoint is visible
 - Call the rest endoint using e.g. poster or SOAP UI
 
-h2. 4. Create a camel route thagt uses your service
+h2. 5. Create a camel route thagt uses your service
 
 - Create a module named route with a camel route
 - The route starts with a file endpoint, extracts some information from the file, calls your service and stores the result in a new file.
 
-h2. 5. Change the camel route to offer a rest service
+h2. 6. Change the camel route to offer a rest service
 
 - Change the module route to now listen to a cxfrs endpoint, call your service and returns the result
 
+h2. 7. Use jpa persistence inside your service
+
+Make your service persist some data using jpa. Use the "Apache Karaf Tutorial Part 6 - Database Access" project db_examplejpa as an example for how to setup your project.
+- Use openjpa and derby as jpa backend
+
+h2. 8. Switch your persistence to hibernate
+
+Same as above but now use hibernate as backend and use the hibernate Session instead of the EntityManager.
+USe the hibernate project in the db tutorial source as an example how to swithc to hibernate and how to create a feature for hibernate.
