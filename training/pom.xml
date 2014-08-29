@@ -12,7 +12,6 @@
         <module>features</module>
         <module>itests</module>
         <module>model</module>
-        <module></module>
     </modules>
 
     <build>

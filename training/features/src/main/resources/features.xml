@@ -3,11 +3,12 @@
     xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.0.0 http://karaf.apache.org/xmlns/features/v1.0.0"
-    name="tasklist"
+    name="training"
 >
 
     <feature name="training" version="${pom.version}">
         <bundle>mvn:net.lr.training/training-model/${pom.version}</bundle>
+        <bundle>mvn:net.lr.training/training-service/${pom.version}</bundle>
     </feature>
 
     <feature name="training-ui" version="${pom.version}">
